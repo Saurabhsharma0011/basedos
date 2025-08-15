@@ -1,0 +1,199 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Custom pixel OS theme with cream/white base colors */
+:root {
+  /* Pixel OS Color Palette */
+  --pixel-cream: #faf7f2;
+  --pixel-white: #ffffff;
+  --pixel-black: #222222;
+  --pixel-gray: #4a4a4a;
+  --pixel-blue: #0f84ff;
+  --pixel-green: #2ecc71;
+  --pixel-yellow: #ffc107;
+  --pixel-red: #ff3b30;
+
+  /* Override default theme with pixel colors */
+  --background: var(--pixel-cream);
+  --foreground: var(--pixel-black);
+  --primary: var(--pixel-black);
+  --primary-foreground: var(--pixel-white);
+  --secondary: var(--pixel-gray);
+  --secondary-foreground: var(--pixel-white);
+  --accent: var(--pixel-blue);
+  --accent-foreground: var(--pixel-white);
+  --border: var(--pixel-black);
+  --ring: var(--pixel-blue);
+  --radius: 0.625rem;
+  --sidebar: var(--pixel-cream);
+  --sidebar-foreground: var(--pixel-black);
+  --sidebar-primary: var(--pixel-black);
+  --sidebar-primary-foreground: var(--pixel-white);
+  --sidebar-accent: var(--pixel-gray);
+  --sidebar-accent-foreground: var(--pixel-white);
+  --sidebar-border: var(--pixel-black);
+  --sidebar-ring: var(--pixel-blue);
+}
+
+.dark {
+  --background: #222222;
+  --foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #222222;
+  --secondary: #4a4a4a;
+  --secondary-foreground: #ffffff;
+  --accent: #0f84ff;
+  --accent-foreground: #ffffff;
+  --border: #4a4a4a;
+  --ring: #0f84ff;
+  --radius: 0.625rem;
+  --sidebar: #222222;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ffffff;
+  --sidebar-primary-foreground: #222222;
+  --sidebar-accent: #4a4a4a;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #4a4a4a;
+  --sidebar-ring: #0f84ff;
+}
+
+@theme inline {
+  --font-pixel: var(--font-pixel);
+  --font-mono-pixel: var(--font-mono-pixel);
+  --color-pixel-cream: var(--pixel-cream);
+  --color-pixel-white: var(--pixel-white);
+  --color-pixel-black: var(--pixel-black);
+  --color-pixel-gray: var(--pixel-gray);
+  --color-pixel-blue: var(--pixel-blue);
+  --color-pixel-green: var(--pixel-green);
+  --color-pixel-yellow: var(--pixel-yellow);
+  --color-pixel-red: var(--pixel-red);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Pixel-perfect rendering styles */
+* {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+body {
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  text-rendering: geometricPrecision;
+}
+
+/* Added retro scanline animation and effects */
+@keyframes scanline {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.98;
+  }
+}
+
+/* Retro CRT effects */
+.retro-scanlines {
+  position: relative;
+  overflow: hidden;
+}
+
+.retro-scanlines::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.03) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.retro-scanlines::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1) 50%, transparent);
+  animation: scanline 3s linear infinite;
+  pointer-events: none;
+  z-index: 1001;
+}
+
+.retro-flicker {
+  animation: flicker 0.15s ease-in-out infinite alternate;
+}
+
+/* Retro grid pattern */
+.retro-grid {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Retro dot pattern */
+.retro-dots {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.15) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
