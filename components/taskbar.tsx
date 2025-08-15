@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { Twitter, Send } from "lucide-react"
 
 interface TaskbarProps {
   openWindows: string[]
@@ -206,11 +207,33 @@ export function Taskbar({ openWindows, activeWindow, onAppClick, onAppOpen }: Ta
             {showTooltip === "volume" && `Volume: ${volumeLevel}%`}
             {showTooltip === "battery" &&
               `Battery: ${Math.round(batteryLevel)}%${batteryCharging ? " (Charging)" : ""}${!batterySupported ? " (Mock)" : ""}`}
+            {showTooltip === "telegram" && "Telegram"}
+            {showTooltip === "twitter" && "Twitter"}
           </div>
         )}
 
         {/* Separator */}
         <div className="w-px h-4 bg-pixel-black" />
+
+        {/* Social Links */}
+        <a href="https://t.me/basedOSapp" target="_blank" rel="noopener noreferrer">
+          <button
+            className="text-xs text-white hover:bg-pixel-white hover:text-pixel-black px-1 rounded relative"
+            onMouseEnter={() => setShowTooltip("telegram")}
+            onMouseLeave={() => setShowTooltip(null)}
+          >
+            <Send size={16} />
+          </button>
+        </a>
+        <a href="https://x.com/basedOSapp" target="_blank" rel="noopener noreferrer">
+          <button
+            className="text-xs text-white hover:bg-pixel-white hover:text-pixel-black px-1 rounded relative"
+            onMouseEnter={() => setShowTooltip("twitter")}
+            onMouseLeave={() => setShowTooltip(null)}
+          >
+            <Twitter size={16} />
+          </button>
+        </a>
 
         <div className="text-xs font-pixel text-pixel-black">{currentTime}</div>
       </div>
