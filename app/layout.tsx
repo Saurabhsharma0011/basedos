@@ -18,9 +18,12 @@ const vt323 = VT323({
 })
 
 export const metadata: Metadata = {
-  title: "Retro Pixel OS",
+  title: "BasedOS- the OS that lives on chain",
   description: "A 90s-inspired web operating system",
   generator: "v0.app",
+  icons: {
+    icon: "/logo.png",
+  },
 }
 
 export default function RootLayout({
